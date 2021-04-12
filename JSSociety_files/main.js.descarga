@@ -1,0 +1,292 @@
+let consolex = document.getElementById("consolex");
+let inputAll = document.getElementById("entrame");
+let userFull = { username: "" };
+let nn = document.getElementById("nn");
+nn.innerHTML = "";
+var elnombre = document.getElementById("nombrex");
+var eluid = document.getElementById("uidx");
+var elemail = document.getElementById("emailx");
+let modelo;
+var firebaseConfig = {
+  apiKey: "AIzaSyDg_k_MorkfxsWeOzgVojUULDKjtUYaXQg",
+  authDomain: "edrfinal.firebaseapp.com",
+  databaseURL: "https://edrfinal.firebaseio.com",
+  projectId: "edrfinal",
+  storageBucket: "edrfinal.appspot.com",
+  messagingSenderId: "771450384668",
+  appId: "1:771450384668:web:a5748973b3ed9af7f14ad9",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+document.addEventListener("DOMContentLoaded", function (event) {
+  const db = firebase.database();
+  const dbRef = db.ref("JSSociety");
+  const dbRefUsuario = db.ref("usuarios");
+
+  let ayuda = `<span class="blanco">Holis, aun no funciona nada <br> Pronto arrancamos con nuestra magia.</span><br>`;
+  inputAll.addEventListener("keyup", (event) => {
+    let = inputAll.value.toLowerCase();
+    modelo = `<span class="jss">JSSociety</span>
+      <span class="nombre"> ${userFull.username}</span>
+      <span class="amarillo"> ✗</span> <span class="blanco"> ${inputAll.value}</span> <br>`;
+
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      let expr = inputAll.value.toLowerCase();
+      let parametros = expr.split(" ");
+      switch (parametros[0]) {
+        case "ayuda":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += ayuda;
+          inputAll.value = "";
+          break;
+        case "login":
+          loginUsers(parametros[1]);
+          break;
+        case "clear":
+          consolex.innerHTML = "";
+          inputAll.value = "";
+          break;
+        case "pepeloco":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>Cuanto estés muy desesperadx y nada te funcione, podés crear la variable PepeLoco que hará que todo te funcione mágicamente.</span><br>`;
+          inputAll.value = "";
+          break;
+        case "gatoloco":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>Cuando sientas que no sabés hacer nada con JavaScript y que todo está perdido, creá la variable gatoLoco; este ser te iluminará y te enseñará todo lo que necesites.</span><br>`;
+          inputAll.value = "";
+          break;
+        case "sarlanga":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>Estás a punto de perder la cabeza, lo sé. Relajá creando la variable sarlanga y llenándola de propiedades y atributos.</span><br>`;
+          inputAll.value = "";
+          break;
+        case "saraza":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>No importa que no sepas todo de memoria, hasta los programadores más geniales escriben saraza.</span><br>`;
+          inputAll.value = "";
+          break;
+
+        case "info":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco '>
+¿Ya aprendiste a programar pero no sabés cómo poner en práctica lo que sabés?  <br>
+¿Necesitás ideas sobre qué proyectos realizar?  <br>
+¿Querés ser parte de una comunidad en la que puedas compartir tus dudas? <br>
+<br>
+Entonces, ¿qué estás esperando para sumarte a la JsSociety?
+<br>
+10 retos y 10 masterclasses en 10 meses. Vamos a practicar HTML, CSS, JavaScript,  <br>
+React, React Native, Firebase y más.  <br>
+En cada masterclass, Jony va a resolver el reto del mes y te va a mostrar  <br>
+el camino para completar el desafío tirando mucha data. <br>
+<br>
+Cada uno se va a publicar el día 10 del mes correspondiente; vas a poder enviar  <br>
+el resultado para que Jony lo corrija durante  <br>
+los Viernes de Proyectos por Twitch y mejorarlo para agregarlo a tu portfolio. <br>
+<br>
+Además, vas a ser parte de un grupo privado de Discord para compartir preguntas,  <br>
+ayudar compañerxs y resolver dudas en compañía.  <br>
+          
+El valor del programa es de 7000 pesos y podés hacer la comprar  <br>
+con el comando comprar. <br>
+          
+          </span><br>`;
+          inputAll.value = "";
+          break;
+        case "retos":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>
+<strong>¿Cuáles van a ser los retos? </strong> <br> <br>
+
+
+&blk34; Juego de la viborita con JavaScript ( Marzo) <br>
+&blk34; e-commerce con Firebase (Abril) <br>
+&blk34; App en React Native (Mayo) <br>
+&blk34; App de escritorio con Electron (Junio) <br>
+&blk34; Turnero con JavaScript y React (Julio) <br>
+&blk34; App para detectar objetos en cámara (Agosto) <br>
+&blk34; Sistema de notas y asistencia de alumnos (Septiembre) <br>
+&blk34; App para vender contenido digital online (Octubre) <br>
+&blk34; Portfolio autoadministrable (Noviembre) <br>
+&blk34; App para llevar gastos (Diciembre) <br>
+          </span><br>`;
+          inputAll.value = "";
+          break;
+        case "discord":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>¿Querés unirte al Discord de EscuelaDevRock? <br> Ahí estamos 24/7 manijeandoo, acá te dejo la invitación---> https://discord.gg/v3HZJqafYH</span><br>`;
+          inputAll.value = "";
+          break;
+
+        case "precio":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>Un año, 10 retos, 10 master class x AR$ 7.000 </span><br>`;
+          inputAll.value = "";
+          break;
+
+        case "clases":
+          if (nn.innerHTML === "") {
+            consolex.innerHTML +=
+              "<apan class='blanco'>Para comprar primero tenes que logearte con el comando 'login'</span><br>";
+            inputAll.value = "";
+          } else {
+            const dbRef = db.ref("cursos").child("JSSociety");
+            dbRef.on("value", (snap) => {
+              consolex.innerHTML += modelo;
+              const programa = snap.val();
+              let table = [];
+              let id = 0;
+              for (const prop in programa) {
+                id++;
+                if (id > 2) {
+                  table.push(`
+ <li key=${prop}>
+<a href="#"><span className="itemtxt" onclick="handleClick('${programa[prop].url}')" url=${programa[prop].url}>${prop}: ${programa[prop].nombre}</span>
+</a>
+</li>`);
+                }
+              }
+              console.log(table, "kee");
+              consolex.innerHTML += `<br><ul><li class='blanco'>Listado de videos</li><li class='blanco'>=============================</li>`;
+
+              for (tt of table) {
+                consolex.innerHTML += tt;
+              }
+              consolex.innerHTML += `</ul><br>`;
+            });
+            inputAll.value = "";
+          }
+          break;
+
+        case "help":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>
+<strong>Comandos disponibles </strong>
+            <br> <br>
+&blk34; login - para loguearte <br>
+&blk34; exit - para desloguearte <br>
+&blk34; clear - para limpiar la consola <br>
+&blk34; comprar - para comprar el programa anual <br>
+&blk34; info - para tener más info sobre el programa <br>
+&blk34; retos - para ver el listado anual de los retos <br>
+&blk34; clases - para ver los videos y retos <br>
+&blk34; cerrar - para cerrar el video actual <br>
+&blk34; discord - para unirte al discord <br>
+&blk34; precio - para ver los precios <br>
+&blk34; gatoloco - para cuando estás desesperadx <br>
+&blk34; pepeloco - para que te fuerzas con Js <br>
+&blk34; sarlanga - para sentirte mejor <br>
+&blk34; saraza - para sentirte mejor x2 <br>
+            
+            <br>`;
+          inputAll.value = "";
+
+          breack;
+        case "exit":
+          deslogear();
+          break;
+
+        case "cerrar":
+          cerrar();
+          break;
+        case "comprar":
+          comprarUno();
+          brack;
+
+        case "copyright":
+          consolex.innerHTML += modelo;
+          consolex.innerHTML += `<apan class='blanco'>© EscuelaDevRock.com</span><br>`;
+          inputAll.value = "";
+          brack;
+        default:
+          inputAll.value = "";
+          consolex.innerHTML += modelo;
+
+          consolex.innerHTML += `<apan class='rojo'>command not found: ${expr}</span><br>`;
+      }
+    }
+  });
+
+  let loginUsers = (dato) => {
+    let provider = "";
+    if (dato === undefined) dato = "google";
+    if (dato === "facebook")
+      provider = new firebase.auth.FacebookAuthProvider();
+    if (dato === "google") provider = new firebase.auth.GoogleAuthProvider();
+    if (dato === "twitter") provider = new firebase.auth.TwitterAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        userFull = {
+          uid: result.user.uid,
+          username: result.user.displayName,
+          profile_picture: result.user.photoURL,
+          email: result.user.email,
+        };
+        nombre.value = userFull.username;
+        uid.value = userFull.uid;
+        email.value = userFull.email;
+        inputAll.value = "";
+        nn.innerHTML = userFull.username;
+      })
+      .catch((error) => console.log(`Error ${error.code}: ${error.message}`));
+  };
+  let deslogear = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("Bye Bye");
+        inputAll.value = "";
+        nn.innerHTML = "";
+      })
+      .catch((err) => {
+        console.log(err, "malo");
+      });
+  };
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      inputAll.value = "";
+      elnombre.value = user.displayName;
+      eluid.value = user.uid;
+      elemail.value = user.email;
+      nn.innerHTML = user.displayName;
+      userFull = {
+        uid: user.uid,
+        username: user.displayName,
+        profile_picture: user.photoURL,
+        email: user.email,
+      };
+
+      modelo = `<span class="jss">JSSociety</span>
+      <span class="nombre"> ${userFull.username}</span>
+      <span class="amarillo"> ✗</span> <span class="blanco">  ${inputAll.value}</span> <br>`;
+    }
+  });
+  let comprarUno = () => {
+    if (nn.innerHTML === "") {
+      consolex.innerHTML +=
+        "<apan class='blanco'>Para comprar primero tenes que logearte con el comando 'login'</span><br>";
+      inputAll.value = "";
+    } else {
+      document.getElementById("comprarJS").submit();
+    }
+  };
+  document.addEventListener("click", () => {
+    inputAll.focus();
+  });
+});
+let videox = document.getElementById("videoX");
+let cerrar = () => {
+  videox.src = "";
+  videox.style.display = "none";
+};
+let handleClick = (e) => {
+  videox.style.display = "block";
+
+  videox.src = e;
+};

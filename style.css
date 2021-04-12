@@ -1,0 +1,60 @@
+body{
+    background:rgb(168, 23, 168);
+    text-align: center;
+    margin:8% 0 0 0;
+}
+
+canvas{
+    border:solid 6px rgb(0, 0, 0);
+    background-color: white;
+}
+
+.container{
+    float: left;
+    margin-top: 9%;
+    margin-left: 18%;
+    
+}
+
+.points-style{
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    padding: 1%;
+    background-color: rgb(255, 255, 255);
+    width: 190%;
+    border: 3px solid black;
+}
+
+button{
+    width: 46%;
+    padding: 3%;
+    color: #000;
+    font-size: 24px;
+    border: 3px solid black;
+}
+
+
+.controls-contain{
+    margin-top: 20%;
+    width: 100%;
+    display: block;
+    margin-left: 41%;
+}
+
+.gameOverModal{
+    width: 31%;
+    float: left;
+    position: absolute;
+    background-color: #fff;
+    padding: 2%;
+    display: none;
+    border: 3px solid black;
+}
+
+.gameOverModal h3{
+    font-size: 39px;
+}
+
+button{
+    cursor: pointer;
+}

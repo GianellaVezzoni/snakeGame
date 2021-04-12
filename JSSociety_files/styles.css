@@ -1,0 +1,87 @@
+.logo {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+body {
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: 0;
+  background: #232940;
+}
+.nombre {
+  *color: #6a75fb;
+  color: magenta;
+  font-weight: 700;
+}
+li {
+  list-style: none;
+}
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+.jss {
+  color: #64f6f6;
+  font-weight: 700;
+}
+.amarillo {
+  color: #fff970;
+}
+.rojo {
+  color: coral;
+}
+
+.my-Input {
+  border-right: 2px solid transparent;
+  width: 50%;
+  display: inline-block;
+  color: white;
+  background: transparent;
+  border: 0px transparent;
+  font-size: 16px;
+  font-family: "Source Code Pro", monospace;
+}
+.my-Input:focus {
+  *animation: PulseAttention 0.5s forwards infinite;
+  outline: none !important;
+}
+
+.blanco {
+  color: white;
+}
+
+pre {
+  width: unset;
+  box-shadow: none;
+  border: none;
+  white-space: pre;
+  overflow: visible;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  right: 19px;
+  opacity: 0.1;
+}
+
+.prep {
+  white-space: pre;
+}
+
+.consolex {
+  min-width: 100%;
+}
+
+p {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+#videoX {
+  margin-top: 30px;
+}
